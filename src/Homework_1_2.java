@@ -22,7 +22,7 @@ public class Homework_1_2 {
                 System.out.println(Math.sqrt(d));
                 x1 = (-1*b+Math.sqrt(d))/(2*a);
                 x2 = (-1*b-Math.sqrt(d))/(2*a);
-                System.out.println("Уравнение имеет два кореня: " + x1 + " и " + x2);
+                System.out.println("Уравнение имеет два корня: " + x1 + " и " + x2);
             }
         } else {
             System.out.println("Уравнение не имеет решений");

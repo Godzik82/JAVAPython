@@ -8,17 +8,16 @@ public class Homework21{
         int errors;
 
         System.out.println("Задача №1: Вывести квадраты чисел от 1 до 25");
-        for (i = 1; i < 26; i++){
+        for (i = 1; i < 26; i++)
             System.out.println("Квадрат числа " + i + " равен " + i*i);
-            }
+            
 
         System.out.println();
         System.out.println("Задача №2: Вывести целые числа от 100 до 1000, которые делятся на 3 и не делятся на 9 на цело");
-        for (i = 100; i < 1001; i++){
-            if (i % 3 == 0 && i % 9 != 0) {
-                System.out.print(i + " ");
-            }
-        }
+        for (i = 100; i < 1001; i++)
+            if (i % 3 == 0 && i % 9 != 0)
+                System.out.print(i + " ");    
+        
         
         System.out.println('\n');
         System.out.println("Задача №3: Даны две матрицы. Найти сумму матриц");
@@ -40,14 +39,13 @@ public class Homework21{
             }
         }
         System.out.println("Сумма введенных матриц:");
-        for (int str = 0; str < strmatrix; str++){
+        for (int str = 0; str < strmatrix; str++)
             for (int col = 0; col < colmatrix; col++){
-                if (col + 1 != colmatrix){
+                if (col + 1 != colmatrix)
                     System.out.print(matrix[str][col] + " ");
-                }
-                else {System.out.println(matrix[str][col] + " ");}  
+                else System.out.println(matrix[str][col] + " "); 
             }
-        }
+        
 
         System.out.println();
         System.out.println("Задача №4: Реализовать алгоритм сортировки пузырьком для массива типа int");
@@ -61,6 +59,9 @@ public class Homework21{
         int count = 1;
 
         do{
+            for (int elm_arr : arr )
+                System.out.print(elm_arr + " ");
+            
             errors = 0;
             for (i = 1; i < arr.length; i++) {
                 if (arr[i] < arr[i-1]){
@@ -68,12 +69,10 @@ public class Homework21{
                     errors++;
                 }
             }
-            for (int elm_arr : arr ){
-                System.out.print(elm_arr + " ");
-            }
+            
             System.out.println("Итерация № " + count);
             count++;
-        } while (errors > 1);
+        } while (errors > 0);
         in.close();
         
     }
