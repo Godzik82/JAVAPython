@@ -66,7 +66,7 @@ public class HomeWork{
             return 1;
     }
 
-    public static double degree(double x, double y) {
+    public static double degree(double x, int y) {
         if (y == 0)
             return 1;
         else if (y == 1)
