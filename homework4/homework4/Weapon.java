@@ -14,6 +14,10 @@ public class Weapon {
     }
 
     public void downStrength(){
-        strength -= 2;
+        if(exist == 1){
+            strength -= 1;
+            if(strength <= 0)
+                exist = 0;
+            }
     }
 }
