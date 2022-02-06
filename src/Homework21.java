@@ -51,6 +51,7 @@ public class Homework21{
         System.out.println("Задача №4: Реализовать алгоритм сортировки пузырьком для массива типа int");
         System.out.println("Введите длину массива");
         int range = in.nextInt();
+        in.close();
         int[] arr = new int[range];
         for (i=1; i <= range; i++){
             System.out.println("Введите " + i + " элемент массива:");
@@ -73,7 +74,7 @@ public class Homework21{
             System.out.println("Итерация № " + count);
             count++;
         } while (errors > 0);
-        in.close();
+        
         
     }
 }
