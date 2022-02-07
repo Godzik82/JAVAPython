@@ -1,4 +1,5 @@
-package homework3;
+package homework_3;
+
 import java.util.Scanner;
 
 public class HomeWork{
@@ -80,3 +81,4 @@ public class HomeWork{
             return 1 / x * degree(x, y + 1);
     }
 }
+

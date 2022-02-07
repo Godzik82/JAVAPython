@@ -1,4 +1,4 @@
-package homework4;
+package homework_4;
 
 public class Armour{
     String name;
@@ -14,10 +14,13 @@ public class Armour{
     }
 
     public void downStrength(){
-        if(exist == 1)
+        if (exist != 0){
             strength -= 1;
-        if(strength <= 0)
-            exist = 0;
+            if(strength == 0){
+                exist = 0;
+                System.out.println("Броня разлетелась");
+            }
+        }
     }
     
 }

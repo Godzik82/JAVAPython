@@ -1,6 +1,8 @@
+package homework_2;
+
 import java.util.Scanner;
 
-public class Homework21{
+public class HomeWork{
         
     public static void main(String[] args){
         int i;
@@ -16,9 +18,8 @@ public class Homework21{
         System.out.println("Задача №2: Вывести целые числа от 100 до 1000, которые делятся на 3 и не делятся на 9 на цело");
         for (i = 100; i < 1001; i++)
             if (i % 3 == 0 && i % 9 != 0)
-                System.out.print(i + " ");    
-        
-        
+                System.out.print(i + " ");
+
         System.out.println('\n');
         System.out.println("Задача №3: Даны две матрицы. Найти сумму матриц");
         Scanner in = new Scanner(System.in);
@@ -38,6 +39,7 @@ public class Homework21{
                 matrix[str-1][col-1] = elm;
             }
         }
+
         System.out.println("Сумма введенных матриц:");
         for (int str = 0; str < strmatrix; str++)
             for (int col = 0; col < colmatrix; col++){
@@ -45,7 +47,6 @@ public class Homework21{
                     System.out.print(matrix[str][col] + " ");
                 else System.out.println(matrix[str][col] + " "); 
             }
-        
 
         System.out.println();
         System.out.println("Задача №4: Реализовать алгоритм сортировки пузырьком для массива типа int");
@@ -57,8 +58,8 @@ public class Homework21{
             System.out.println("Введите " + i + " элемент массива:");
             arr[i-1] = in.nextInt();
         }
-        int count = 1;
 
+        int count = 1;
         do{
             for (int elm_arr : arr )
                 System.out.print(elm_arr + " ");
@@ -74,7 +75,6 @@ public class Homework21{
             System.out.println("Итерация № " + count);
             count++;
         } while (errors > 0);
-        
-        
     }
 }
+
