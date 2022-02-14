@@ -1,5 +1,4 @@
 package homework_4;
-import homework_4.HomeWork;
 
 public class Bag {
     String[][] capacity;

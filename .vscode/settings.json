@@ -1,7 +1,9 @@
 {
     "java.project.sourcePaths": [
         "HomeWork",
-        "src"
+        "src",
+        "Game",
+        "game"
     ],
     "java.project.outputPath": "bin"
 }
