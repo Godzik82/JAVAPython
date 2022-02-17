@@ -22,6 +22,7 @@ public abstract class Unit implements Units{
         this.selfAttack = selfAttack;
         this.alive = 1;
         this.maxWeigth = maxWeigth;
+
     }
 
     protected Unit(String name, int hp, int selfAttack){
