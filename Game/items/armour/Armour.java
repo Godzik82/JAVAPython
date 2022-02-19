@@ -1,10 +1,10 @@
 package items.armour;
 
-import interfaces.Items;
+import interfaces.*;
 
 public abstract class Armour implements Items {
     String name;
-    float weigth;
+    int weigth;
     int defence;
     int streigth;
     int exist;
@@ -21,7 +21,7 @@ public abstract class Armour implements Items {
         return name;
     }
 
-    public float getWeight(){
+    public int getWeight(){
         return weigth;
     }
     public int getDefence(){
@@ -40,13 +40,15 @@ public abstract class Armour implements Items {
     }
 
     public void brokeItem(){
-        if (exist != 0 && streigth < 1)
-            exist = 0;    
+        if (exist != 0 && streigth < 1) {
+            exist = 0;
+            System.out.printf("%s is broken%n", name);
+        }
         else streigth = downStreigth();
     }
 
     public String[] addItem(){
-        return new String[]{name, Float.toString(weigth), Integer.toString(defence), Integer.toString(streigth)};
+        return new String[]{name, Integer.toString(weigth), Integer.toString(defence), Integer.toString(streigth)};
     }
 
     public void replaceItem(Armour replaceItem){
@@ -54,6 +56,10 @@ public abstract class Armour implements Items {
         this.weigth = replaceItem.getWeight();
         this.defence = replaceItem.getDefence();
         this.streigth = replaceItem.getStreigth();
+    }
+
+    public void infoItem(){
+        System.out.printf("%s (Weigth - %d, Defence - %d, Streigth - %d)%n", name, weigth, defence, streigth);
     }
 }
 

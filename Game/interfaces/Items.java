@@ -4,7 +4,7 @@ public interface Items {
     
     int getExist();
     String getName();
-    float getWeight();
+    int getWeight();
     // int getStreigth();
     // void setExist(int changeExist);
     public default int downStreigth(){

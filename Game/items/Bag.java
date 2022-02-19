@@ -26,7 +26,7 @@ public class Bag implements Items {
     }
 
     @Override
-    public float getWeight() {
+    public int getWeight() {
         return weigth;
     }
 

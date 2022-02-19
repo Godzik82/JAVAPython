@@ -3,12 +3,12 @@ import interfaces.Items;
 
 public abstract class Weapon implements Items{
     String name;
-    float weigth;
+    int weigth;
     int damage;
     int streigth;
     int exist = 1;
 
-    protected Weapon(String name, float weigth, int damage, int streigth){
+    protected Weapon(String name, int weigth, int damage, int streigth){
         this.name = name;
         this.weigth = weigth;
         this.damage = damage;
@@ -20,7 +20,7 @@ public abstract class Weapon implements Items{
         return name;
     }
 
-    public float getWeight(){
+    public int getWeight(){
         return weigth;
     }
     public int getDamage(){
@@ -47,8 +47,10 @@ public abstract class Weapon implements Items{
     }
 
     public void brokeItem(){
-        if (exist != 0 && streigth < 1)
-            exist = 0;    
+        if (exist != 0 && streigth < 1){
+            exist = 0;
+            System.out.printf("%s is broken%n", name);
+        }
         else streigth = downStreigth();
     }
 

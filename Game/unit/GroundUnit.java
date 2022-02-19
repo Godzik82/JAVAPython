@@ -48,7 +48,7 @@ public class GroundUnit extends Unit{
         };
         Sword weapon = new Sword(
             paramWeapon[0],
-            Float.parseFloat(paramWeapon[1]),
+            Integer.parseInt(paramWeapon[1]),
             Integer.parseInt(paramWeapon[2]),
             Integer.parseInt(paramWeapon[3])
         );
