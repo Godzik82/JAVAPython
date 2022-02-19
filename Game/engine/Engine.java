@@ -1,20 +1,17 @@
 package engine;
 
 import unit.*;
-
 import java.util.concurrent.TimeUnit;
 
-import items.armour.Armour;
 
 
 public class Engine {
     static Unit[][] fighters = new Unit[2][3];
+    
 
     public static Unit[][] createUnit(){
         Unit curentUnit = null;
-        String[] paramUnit;
         
-
         System.out.println("Созданы юниты:");
         for (int i = 0; i < 2; i++){
             for(int j = 0; j < 3; j++){
@@ -23,20 +20,10 @@ public class Engine {
                         curentUnit = GroundUnit.createUnit();
                         break;
                     case 2:
-                        paramUnit = Dictionary.flyingUnits[Unit.rnd(Dictionary.flyingUnits.length)];
-                        curentUnit = new FlyingUnit(paramUnit[0],
-                                                    Integer.parseInt(paramUnit[1]),
-                                                    Integer.parseInt(paramUnit[2])
-                        );
+                        curentUnit = FlyingUnit.createUnit();
                         break;
                     case 3:
-                        paramUnit = Dictionary.magicUnits[Unit.rnd(Dictionary.magicUnits.length)];
-                        curentUnit = new MagicUnit(paramUnit[0],
-                                                    Integer.parseInt(paramUnit[1]),
-                                                    Integer.parseInt(paramUnit[2]),
-                                                    Integer.parseInt(paramUnit[3]),
-                                                    Integer.parseInt(paramUnit[4])
-                        );
+                        curentUnit = MagicUnit.createUnit();
                         break;
                     default:
                         System.out.println("Something wrong....");
@@ -49,35 +36,45 @@ public class Engine {
         return fighters;
     }
         
-
     public static int chooseTypeUnit(){
         return Unit.rnd(3) + 1;
     }
 
-    public static void batle() throws InterruptedException {
+    public static int chooseUnit(Unit[] fighters){
+        
+        int i = Unit.rnd(3);
+        while (fighters[i].getAlive() == 0)
+            i = Unit.rnd(3);
+        // System.out.println(i);
+        return i;
+    }
+    public static void battle() throws InterruptedException {
+
     int endBattle = 1;
     int turn = 0;
     
-    System.out.println("Batle begins...");
-    System.out.printf("Player 1 - %s%n", fighters[0][0].getName());
-    System.out.printf("Player 2 - %s%n", fighters[1][0].getName());
-    
+    System.out.println("Battle begins...");    
 
-    do{
-        fighters[turn % 2][0].assault(fighters[1 - (turn % 2)][0]);
+    do{        
+        fighters[turn % 2][chooseUnit(fighters[turn % 2])].assault(fighters[1 - (turn % 2)][chooseUnit(fighters[1 - (turn % 2)])]);
+        turn++;
+        // System.out.println(Integer.toString(turn) + 
+        //                     Integer.toString(defeatTeam(fighters[0])) + 
+        //                     Integer.toString(defeatTeam(fighters[1]))
+        // );
         if (defeatTeam(fighters[0]) == 0 || defeatTeam(fighters[1]) == 0)
             endBattle = 0;
-        turn++;
-        TimeUnit.MILLISECONDS.sleep(300);
+        // TimeUnit.MILLISECONDS.sleep(300);
     }
-    while(endBattle == 1);
+    while (endBattle == 1);
+
     }
 
     public static int defeatTeam(Unit[] fighters){
-        int defeat = 0;
+        int defeat = fighters.length;
         for (Unit elm : fighters)
-            if (elm == null)
-                defeat++;
+            if (elm.getAlive() == 0)
+                defeat--;
         return defeat;
 
     }

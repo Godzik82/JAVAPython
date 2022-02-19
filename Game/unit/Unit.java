@@ -1,8 +1,10 @@
 package unit;
+
 import interfaces.Items;
 import interfaces.Units;
 import items.armour.Armour;
 import items.weapon.Weapon;
+import items.Bag;
 import java.util.Random;
 
 public abstract class Unit implements Units{
@@ -14,8 +16,10 @@ public abstract class Unit implements Units{
     int money;
     int maxWeigth;
     int mana;
-    Armour[] armour = new Armour[4];
+    // Armour[] armour = new Armour[4];
+    Armour[] armour;
     Weapon weapon;
+    Bag bag;
 
     protected Unit(String name, int hp, int selfAttack, int maxWeigth) {
         this.name = name;
@@ -23,7 +27,6 @@ public abstract class Unit implements Units{
         this.selfAttack = selfAttack;
         this.alive = 1;
         this.maxWeigth = maxWeigth;
-
     }
 
     protected Unit(String name, int hp, int selfAttack){
@@ -43,24 +46,38 @@ public abstract class Unit implements Units{
     }
     
     public void assault(Unit targetUnit){
-        int damage = weapon != null ? weapon.damageWeapon() : getSelfAttack();
-        int totalDamage = damage - targetUnit.sumArmour();
-        int stop = 0;
+        int damage = weaponExist() && weapon.getExist() == 1? weapon.damageWeapon() : getSelfAttack();
+        int totalDamage = targetUnit.armourExist() ? damage - targetUnit.sumArmour() : damage;
+        // System.out.printf("%s damage is %d, total damage %d%n", name, damage, totalDamage);
+        // targetUnit.infoUnit();
         if (totalDamage > 0){
             targetUnit.hp -= totalDamage;
-            System.out.printf("%s attack %s, get damege %d%n", name, targetUnit.name, totalDamage);
+            if (targetUnit.hp > 0)
+                System.out.printf("%s attack %s, get damage %d, health - %d%n",
+                                    name, targetUnit.name, totalDamage, targetUnit.hp);
+            else {
+                targetUnit.death();
+                money += DROP;
+                System.out.printf("%s killed %s. Awards %d$%n", name, targetUnit.name, DROP);
+                if (targetUnit.bag != null && bag != null)
+                    bag.addBag(targetUnit, allWeight(), maxWeigth, name);
+            }
         }
         else System.out.printf("%s attack %s and missed%n", name, targetUnit.name);
-        if (weapon != null)
-            weapon.brokeItem();
-        if (targetUnit.armour != null )
-            do {
-                int i = rnd(3);
-                if (targetUnit.armour[i] != null && targetUnit.getArmourExist() != 0) {
-                        targetUnit.armour[i].brokeItem();
-                        stop = 1;
+        if (weapon != null && weapon.getExist() == 1){
+            weapon.brokeItem(name);
+            
+        }
+        if (targetUnit.armour != null && targetUnit.getArmourExist() > 0){
+            do{
+                int i = rnd(targetUnit.armour.length);
+                if (targetUnit.armour[i].getExist() == 1){
+                    targetUnit.armour[i].brokeItem(name);
+                    break;
                 }
-            } while (stop == 0);         
+            } while (true);
+        }
+            
     }
 
     public static int rnd(int a){
@@ -71,7 +88,7 @@ public abstract class Unit implements Units{
         int sumArmour = 0;
         for (int i=0; i < armour.length; i++)
             if (armour[i] != null)
-                sumArmour += armour[i].getDefence();
+                sumArmour += armour[i].getDefence() * armour[i].getExist();
         return sumArmour; 
     }
 
@@ -83,23 +100,41 @@ public abstract class Unit implements Units{
         return exsist;
     }
 
-    public float sumWeightArmour(){
-        float sumWeightArmour = 0;
+    public int sumWeightArmour(){
+        int sumWeightArmour = 0;
         for (int i = 0; i < 4; i++)
             if (armour[i] != null)
                 sumWeightArmour += armour[i].getWeight();
         return sumWeightArmour;
         }
 
-    public float allWeight(){
-        return weapon.getWeight() + sumWeightArmour();
+    public int allWeight(){
+        return weapon.getWeight() + sumWeightArmour() + bag.getWeight();
+    }
+
+    public Items[] getAllItems(){
+        Items[] getAllItems = new Items[weapon.getExist()+getArmourExist()];
+        int i = 0;
+        if (weapon.getExist() == 1){
+            getAllItems[0] = getWeapon();
+            i++;
+        }
+        for (Items elm : armour)
+            if (elm.getExist() == 1){
+                getAllItems[i] = elm;
+                i++;
+            }
+        return getAllItems;
     }
 
     public boolean armourExist(){
         return armour != null;
     }
 
-    
+    public boolean weaponExist() {
+        return weapon != null;
+    }
+
     public int getSelfAttack(){
         return selfAttack;
     }
@@ -118,10 +153,19 @@ public abstract class Unit implements Units{
 
     public void infoUnit(){
         System.out.printf("%n%s%nHealth: %d%nAttack: %d%n", name, hp, selfAttack);
-        for (Armour elm : armour){
-            if (elm != null)
-                elm.infoItem();
+        if (armour != null)
+            for (Armour elm : armour){
+                if (elm != null)
+                    elm.infoItem();
         }
+    }
+
+    public int getAlive(){
+        return alive;
+    }
+
+    public Weapon getWeapon(){
+        return weapon;
     }
 }
 

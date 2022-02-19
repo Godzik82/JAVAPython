@@ -33,6 +33,7 @@ public abstract class Weapon implements Items{
     public int getExist() {
         return exist;
     }
+    
 
     public int damageWeapon() {
         return damage * exist;
@@ -43,15 +44,18 @@ public abstract class Weapon implements Items{
     }
 
     public String[] addItem(){
-        return new String[]{name, Float.toString(weigth), Integer.toString(damage), Integer.toString(streigth)};
+        return new String[]{name, Integer.toString(weigth), Integer.toString(damage), Integer.toString(streigth)};
     }
 
-    public void brokeItem(){
-        if (exist != 0 && streigth < 1){
+    public void brokeItem(String nameUnit){
+        streigth -= downStreigth();
+        if (streigth < 1){
             exist = 0;
-            System.out.printf("%s is broken%n", name);
+            System.out.printf("%s %s is broken%n", nameUnit, name);
         }
-        else streigth = downStreigth();
+        else {
+            System.out.printf("Повреждение %s. Прочность - %d%n", name, streigth);
+        }
     }
 
     public void replaceItem(Weapon replaceItem){

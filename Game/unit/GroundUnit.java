@@ -1,16 +1,23 @@
 package unit;
+import items.Bag;
 import items.armour.*;
 import items.weapon.Sword;
-import items.weapon.Weapon;
 import engine.Dictionary;
 
 public class GroundUnit extends Unit{
 
-    public GroundUnit(String name, int hp, int selfAttack, int maxWeigth, Armour[] armour, Sword weapon, int money) {
+    public GroundUnit(String name,
+                        int hp,
+                        int selfAttack,
+                        int maxWeigth,
+                        Armour[] armour,
+                        Sword weapon,
+                        int money){
         super(name, hp, selfAttack, maxWeigth);
         this.armour = armour;
         this.weapon = weapon;
         this.money = money;
+        this.bag = new Bag("Bag", 10, 5);
     }
 
     public static Unit createUnit(){
@@ -60,6 +67,6 @@ public class GroundUnit extends Unit{
                                 armour,
                                 weapon,
                                 100
-                                );
+        );
     }
 }

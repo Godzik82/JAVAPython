@@ -39,12 +39,15 @@ public abstract class Armour implements Items {
         this.exist = exist;
     }
 
-    public void brokeItem(){
-        if (exist != 0 && streigth < 1) {
+    public void brokeItem(String nameUnit){
+        streigth -= downStreigth();
+        if (streigth < 1){
             exist = 0;
-            System.out.printf("%s is broken%n", name);
+            System.out.printf("%s %s is broken%n", nameUnit, name);
         }
-        else streigth = downStreigth();
+        else {
+            System.out.printf("Повреждение %s. Прочность - %d%n", name, streigth);
+        }
     }
 
     public String[] addItem(){

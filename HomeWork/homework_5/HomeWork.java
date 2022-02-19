@@ -5,7 +5,7 @@ public class HomeWork {
 
     public static void main(String[] args) throws InterruptedException {
         Engine.createUnit();
-        Engine.batle();
+        Engine.battle();
         
     }
     
