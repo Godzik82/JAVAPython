@@ -1,6 +1,11 @@
 package engine;
 
 import unit.*;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.concurrent.TimeUnit;
 
 
@@ -8,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 public class Engine {
     static Unit[][] fighters = new Unit[2][3];
     
-
     public static Unit[][] createUnit(){
         Unit curentUnit = null;
         
@@ -48,7 +52,8 @@ public class Engine {
         // System.out.println(i);
         return i;
     }
-    public static void battle() throws InterruptedException {
+    
+    public static Unit[] battle() throws InterruptedException {
 
     int endBattle = 1;
     int turn = 0;
@@ -58,16 +63,14 @@ public class Engine {
     do{        
         fighters[turn % 2][chooseUnit(fighters[turn % 2])].assault(fighters[1 - (turn % 2)][chooseUnit(fighters[1 - (turn % 2)])]);
         turn++;
-        // System.out.println(Integer.toString(turn) + 
-        //                     Integer.toString(defeatTeam(fighters[0])) + 
-        //                     Integer.toString(defeatTeam(fighters[1]))
-        // );
         if (defeatTeam(fighters[0]) == 0 || defeatTeam(fighters[1]) == 0)
             endBattle = 0;
-        // TimeUnit.MILLISECONDS.sleep(300);
     }
     while (endBattle == 1);
 
+    if (defeatTeam(fighters[0]) == 0)
+        return fighters[1];
+    else return fighters[0];
     }
 
     public static int defeatTeam(Unit[] fighters){
@@ -78,5 +81,21 @@ public class Engine {
         return defeat;
 
     }
+
+    public static void saveTeam(Unit[] winFigthers) {
+        File file = new File("./Game/engine/save.txt");
+        
+
+        for (Unit elm : winFigthers){
+            if (elm.getAlive() == 1)
+                try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))){
+                    oos.writeObject(elm);
+                } catch (IOException e){
+                    System.out.println(e.getMessage());
+                }
+        }
+    }
+        
 }
+
 
