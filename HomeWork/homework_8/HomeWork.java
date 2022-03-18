@@ -23,7 +23,7 @@ public class HomeWork {
                 removeFromStore();
             else if (check == 3)
                 infoStore();
-            else if (check < 1 && check > 4)
+            else if (check < 1 || check > 4)
                 System.out.println("Такой пункт меню отсутствует. Выберите команду заново.");
             }
         while (check != 4);
@@ -33,7 +33,13 @@ public class HomeWork {
 
     public static Integer mainMenu() throws IOException {
         System.out.println("____МЕНЮ____\n1. Добавить товар\n2. Удалить товар\n3. Вывести все товары\n4. Выход\nВыберите пункт:");
-        return  Integer.parseInt(reader.readLine());
+        try {
+            return  Integer.parseInt(reader.readLine());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+        
     }
 
     public static void putStore() throws IOException {
@@ -45,12 +51,11 @@ public class HomeWork {
 
     public static void removeFromStore() throws IOException {
         infoStore();
-        if (store.isEmpty()){
+        if (!store.isEmpty()){
             System.out.println("Введите через пробел название и цену товара, который будет удален:");
             String[] infoRemoveProduct = reader.readLine().split(" ");
             Product removeProduct = new Product(infoRemoveProduct[0], Float.parseFloat(infoRemoveProduct[1]));
             for (Integer i = 0; i < store.size(); i++){
-                System.out.println(store.get(i).keySet().hashCode() + " " + removeProduct.hashCode());
                 if (store.get(i).keySet().hashCode() == removeProduct.hashCode()){
                     store.remove(store.get(i));
                     System.out.println("Товар удален");
