@@ -34,13 +34,14 @@ public class HomeWork{
                         System.out.println("Ошибка" + e.getMessage());
                     }
                 }
-                else if (choose.equals("2"))
+                else if (choose.equals("2")){
                     System.out.println("Показ вычислений в течение 3 секунд");
                     try {
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                }
                 
 
             } while (!choose.equals("3"));
