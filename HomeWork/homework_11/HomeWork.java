@@ -25,7 +25,7 @@ public class HomeWork{
                     System.out.println("Введите число и его степень через пробел:");
                     try{
                     String[] param = reader.readLine().split(" ");
-                    new Calculate(Integer.parseInt(param[0]), Integer.parseInt(param[0])).start();;
+                    new Calculate(Integer.parseInt(param[0]), Integer.parseInt(param[0])).start();
                     Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
