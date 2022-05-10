@@ -65,4 +65,8 @@ public abstract class Weapon implements Items{
         this.streigth = replaceItem.getStreigth();
     }
 
+    public void infoItem(){
+        System.out.printf("%s (Weigth - %d, Defence - %d, Streigth - %d)%n", name, weigth, damage, streigth);
+    }
+
 }
