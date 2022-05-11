@@ -8,19 +8,32 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.concurrent.TimeUnit;
 
+import items.armour.Armour;
+import items.weapon.Weapon;
+
 
 
 public class Engine {
     static Unit[][] fighters = new Unit[2][3];
     
     public static Unit[][] createUnit(){
+        // DBHandler dbHandler = DBHandler.getInstance();
         Unit curentUnit = null;
+        String typeUnit;
+        Weapon weapon;
+        Armour[] armour;
         
         System.out.println("Созданы юниты:");
         for (int i = 0; i < 2; i++){
             for(int j = 0; j < 3; j++){
                 switch (chooseTypeUnit()){
                     case 1:
+                        // armour = new Armour[] {
+                        //     dbHandler.getItemArmour("helmet"),
+                        //     dbHandler.getItemArmour("body"),
+                        //     dbHandler.getItemArmour("gloves"),
+                        //     dbHandler.getItemArmour("boots")};
+                        // weapon = dbHandler.getWeapon("sword");
                         curentUnit = GroundUnit.createUnit();
                         break;
                     case 2:
