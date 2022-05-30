@@ -156,8 +156,10 @@ public abstract class Unit implements Units{
         if (armour != null)
             for (Armour elm : armour){
                 if (elm != null)
-                    elm.infoItem();
-        }
+                    elm.infoItem();}
+        if (weapon != null)
+            weapon.infoItem();
+        
     }
 
     public int getAlive(){
